@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Registrarse</title>
+	</head>
+	<body>
+		<h1>Menu</h1>
+
+		<div>
+			<nav>
+				<ul>
+					<li>opcion 1</li>
+					<li>opcion 2</li>
+					<li>opcion 3</li>
+				</ul>
+			</nav>
+		</div>
+		<div>
+			<h1>Formulario</h1>
+			<form action="{{ url_for('signUp') }}" method="post">
+				<label for="inputCedula">Cedula</label>
+				<input type="cedula" name="inputCedula" placeholder="Cedula" required autofocus>
+				<label for="inputNombre">Nombre</label>
+                                <input type="nombre" name="inputNombre" placeholder="Nombre" required autofocus>
+				<label for="inputApellido">Apellido</label>
+                                <input type="apellido" name="inputApellido" placeholder="Apellido" required autofocus>
+				<label for="inputTelefono">Telefono</label>
+                                <input type="telefono" name="inputTelefono" placeholder="Telefono" required autofocus>
+				<label for="inputDireccion">Direccion</label>
+                                <textarea type="direccion" name="inputDireccion" placeholder="Direccion" required autofocus></textarea>
+				<input type="submit">
+	
+			</form>
+
+			<footer class="footer">
+       				<p>&copy; Venezuela 2019</p>
+      			</footer>
+		</div>
+	</body>
+</html>

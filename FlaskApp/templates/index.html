@@ -1,0 +1,258 @@
+{# <herencia y macro> #}
+{% extends 'base/base.html' %}
+
+	{% block content %}
+
+	{# {% from "_macro.html" import menu  %}
+	{{ menu() }} #}
+
+	 {% if not current_user.is_authenticated %}	
+		<!-- <div>		
+			<nav>
+				<ul>
+					<li><a href="showSignUp">Sign Up</a></li>
+				</ul>
+			</nav>
+		</div> -->
+		
+		<h2 style="text-align:center">Acceder</h2>
+
+        
+		{% from "_macro.html" import formulario %}
+       
+       
+		<form action="{{ url_for('login') }}" method="post" >
+     		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      		<div class="form-group col-xs-12 ">
+      		{{ formulario(form.cedula, class="form-control", placeholder="Introduzca su cedula") }}
+      		</div>
+    		<div class="form-group col-xs-12">
+      		{{ formulario(form.nombre, class="form-control", placeholder="Introduzca su nombre") }}
+      		</div>
+      		<div class="form-group col-xs-12">
+			<button type="submit" class="btn btn-primary">Enviar</button>     		 
+    		</div>
+	  	</form> 	
+
+
+	 {% else %}
+
+	 <!--	<div>		
+			<nav>
+				<ul>
+					<li><a href="logout">Salir</a></li>
+				</ul>
+			</nav>
+		</div> -->
+	 						
+	 	<h3 style="margin-bottom: 50px; text-align:center"><span style="color:#ce3a3a">FRAMEWORK PARA LA OPTIMIZACION DEL DESARROLLO DE APLICACIONES WEB</span></h3>
+
+	 	<p style="text-align:right"><strong>Grupo 4 Py - Flask: 18.442.329</strong></p>
+
+<h5><span style="color:#ce3a3a"><strong>FRAMEWORK</strong></span></h5>
+
+<p><strong>framenwork</strong></p>
+
+<ol>
+	<li value="1">Conjunto de herramientas, librerías y buenas practicas predefinidas que nos facilita el desarrollo de un programa.</li>
+	<li>Marco de trabajo predefinido.</li>
+	<li>Conjunto de convenciones, estándares o paradigmas y buenas practicas.</li>
+	<li>Conjunto de funcionalidades costosas ya desarrolladas.</li>
+	<li>El framework es un esquema (un esqueleto, un patrón) para el desarrollo y/o la implementación de una aplicación.</li>
+</ol>
+
+<p><strong>ventajas</strong></p>
+
+<ul>
+	<li>Sirve como base para tus programas.</li>
+	<li>Evita tareas repetitivas.</li>
+	<li>Aumenta la productividad.</li>
+	<li>Favorece el trabajo en equipo.</li>
+	<li>Infunde buenas practicas.</li>
+</ul>
+<p><strong>desventajas</strong></p>
+<ul>
+	<li>La utilización de un framenwork en el desarrollo de una aplicación implica un cierto costo inicial de aprendizaje.</li>
+</ul>
+
+
+<h5><strong>PROCESO DE INSTALACION DE FLASK</strong></h5>
+
+<h5><span style="color:#ce3a3a"><strong>INSTALAR PIP 3</strong></span></h5>
+
+<p><strong>pip:</strong> es un sistema de gestion de paquetes para python (instalador e paquetes) que usa el repositorio PYPI (Python Package Index)</p>
+
+<ul>
+	<li><strong>apt-get install python3-pip</strong></li>
+
+	<li>ver modulos instalados via pip:</li>
+	<ul>
+		<li><strong>pip3 freeze</strong></li> 
+		<li><strong>pip3 list</strong></li>
+	</ul>
+</ul>
+
+<h5><span style="color:#ce3a3a"><strong>INSTALAR VIRTUALENV</strong></span></h5>
+
+<p><strong>virtualenv:</strong> es un entorno virtual de python, que nos permite aislar recursos y librerias, posibilitando la instalacion de una libreria y sus distintas versiones sin que haya ningun tipo de conflicto.</p>
+
+<ol>
+	<li value="1"> <strong>pip3 install virtualenv</strong> #Para usar con python3 </li> 
+
+	<li>  ubicarse en directorio deseado ejemplo: <strong>cd /home/user</strong> </li> 
+
+	<li>  <strong>virtualenv env --python=python3</strong> #donde env es el nombre del proyecto/carpeta del entorno virtual </li> 
+
+	<li>   <strong>ls | grep env</strong> #cerciorarse de que se creo la carpeta </li> 
+
+	<li>   <strong>cd env/</strong> #entrar en la carpeta </li> 
+
+	<li>   <strong>source bin/activate</strong> #activar el entorno virtual: se ejecuta el escript activate de virtualenv en bin/ </li> 
+
+	<li>   <strong>(env) root@debian:/home/miguel/env</strong> #debe mostar algo similar </li> 
+</ol>
+
+<h5><span style="color:#ce3a3a"><strong>INSTALAR FLASK</strong></span></h5>
+
+<p><strong>flask:</strong> es un microframework de python, ideal para principiantes, que usa la tecnologia WSGI (Web Server Gateway Interface), similar a la especificacion de java servlet o ASP/ASP.NET pero mucho mas simple, basado en el estandar CGI, enfocado en python.</p>
+
+<ul>
+	
+	<li><strong>pip3 install flask</strong> #dentro del entorno virutal y en minusculas</li>
+
+	<li>ejecutar flask:  <strong>FLASK_APP=mi_archivo_flask.py flask run</strong>  
+	<ul>
+		<li>otra manera de ejecutar flask es llamando a la funcion "<strong>app.run()</strong>" dentro del archivo que contiene el codigo fuente, luego de: <strong>if __name__ == "__main__":</strong> </li>
+	</ul>
+</ul>
+
+<p><strong>problemas y soluciones:</strong></p>
+	
+<p>Mensaje de error:  <strong>WARNING:</strong> "Do not use the development server in a production environment".</p>
+
+<p>A menos que le indique al servidor,  que se está ejecutando en modo de desarrollo, asumirá que lo está utilizando en producción y le advertirá que no lo haga.</p>
+
+	<p>Habilite el modo de desarrollo estableciendo la variable de entorno <strong>FLASK_ENV</strong> para el desarrollo.</p>
+
+	<p>Por defecto: <strong>export FLASK_ENV=production</strong> #ideal cuando el sistema esté culminado</p>
+	 
+	<p>Cambiar  a: <strong>export FLASK_ENV=development</strong> #se habilita el modo de depuracion</p>
+
+	<p>En caso de que su sistema web no se visualice en el navegador quiza el problema se derive de la interfaz loopback, abrir puerto por defecto (5000) creando una regla iptables:</p>
+
+	<p><strong>iptables -t filter -I INPUT -i lo -p tcp --dport 5000 -j ACCEPT</strong></p>
+
+
+<p><strong>nota:</strong></p> 
+
+<p>Cuando lance su aplicacion web a produccion en lugar de en desarrollo, no debería utilizar el servidor de desarrollo incorporado (flask run). El servidor de desarrollo es proporcionado por <strong>Werkzeug</strong> por conveniencia o simplicidad,  pero no está diseñado para ser particularmente eficiente, estable o seguro.</p>
+
+<p>En su lugar, utilice un servidor WSGI de producción. Por ejemplo: <strong>Waitress</strong>, tambien puede utilizar otros servidores web como <strong>Apache2</strong> o <strong>Ngix</strong>, que puede integrar con flask a traves de un servidor de aplicaciones tal que: <strong>uWSGI</strong>.</p>
+
+<p><strong>esquema:</strong></p>
+
+<ul>
+	<li><strong>flask/</strong></li>
+	<li>templates/ #todos los archivos html(renderizado) se guardan aca </li>
+	<ul>
+		<li>auth/</li>
+		<li>blog/</li>
+		<li>base/ #herencia</li> 
+	</ul>
+	<li>static/ #imagenes, hojas de estilo, javascript</li>
+	<ul>
+		<li>css/</li>
+		<li>js/</li>
+		<li>img/</li>
+	</ul>
+</ul>
+
+<p><strong>entre sus propiedades mas destacadas:</strong></p>
+
+<ul>
+	<li>Herencia</li>
+	<li>Macros</li>
+</ul>
+
+<h5><span style="color:#ce3a3a"><strong>JINJA2</strong></span></h5>
+
+<p>Jinja es un lenguaje de plantillas (templates) escrito en Python, el cual permite insertar datos procesados y texto predeterminado dentro de un documento de texto.</p>
+
+<p><strong>a.-  expresiones.</strong></p>
+<p>Las expresiones deben estar encerradas entre llaves "<strong>{ }</strong>".</p>
+
+<p>Sintaxis:</p>
+ 
+<p><strong> &#123;&#123; &#60;expresión&#62; &#125;&#125; </strong></p> 
+
+<p><strong>b.- declaraciones.</strong></p>
+
+<p>Las declaraciones deben estar encerradas entre signos de porcentaje "<strong>%</strong>".</p>
+
+<p><strong>&#123;% &#60;declaración&#62; %&#125;</strong></p>
+<p><strong>...</strong></p>
+<p><strong>...</strong></p>
+<p><strong>&#123;% endof &#60;tipo de declaración&#62; %&#125;</strong></p>
+
+<p><strong>c.- comentarios.</strong></p>
+
+<p>Sintaxis:</p>
+
+<p><strong>&#123;# &#60;comentario&#62; #&#125;</strong></p>
+
+<h5><span style="color:#ce3a3a"><strong>INSTALAR MODULOS FLASK</strong></span></h5>
+
+<p><strong>pip3 install flask-modulo</strong> #(ojo dentro del entorno virtualenv)</p>
+
+<p><strong>Modulos usados en este sistema:</p></strong>
+
+<ul>
+	<li><strong>Flask        1.0.2 </strong>#microframework</li>
+	<li><strong>Flask-Login  0.4.1 </strong>#modulo para sesiones</li>
+	<li><strong>Flask-MySQL  1.4.0 </strong>#modulo para conectar con base de datos</li>
+	<li><strong>Flask-WTF    0.14.2 </strong>#modulo para formularios</li>
+	<li><strong>Flask-Bootstrap 3.3.7.1 </strong>#modulo framework frontend</li>
+	<li><strong>Jinja2       2.10 </strong>#lenguaje de plantillas (instalado por defecto con Flask )</li>
+	<li><strong>Werkzeug     0.14.1 </strong># librería de utilidades HTTP y WSGI para Python ( instalado por defecto con Flask )</li>
+</ul>
+
+
+<h5><span style="color:#ce3a3a"><strong>REFERENCIAS</strong></span></h5>
+
+<ul>
+<p><strong>documentacion:</strong></p>
+	<li>http://www.python.org.ar/wiki/WSGI</li>
+	<li>https://es.wikipedia.org/wiki/Flask</li>
+	<li>https://stackoverflow.com/questions/51025893/flask-at-first-run-do-not-use-the-development-server-in-a-production-environmen?rq=1</li>
+<li>http://flask.pocoo.org/docs/dev/tutorial/deploy/</li>
+<p><strong>configuracion:</strong></p>
+	<li>http://flask.pocoo.org/docs/1.0/config/</li>
+<p><strong>API:</strong></p>
+	<li>http://flask.pocoo.org/docs/1.0/api/</li>
+<p><strong>flask-wtf:</strong></p>
+	<li>https://wtforms.readthedocs.io/en/stable/validators.html#</li>
+<p><strong>wtforms:</strong></p>
+	<li>https://www.tutorialspoint.com/flask/flask_wtf.htm</li>
+	<li>https://wtforms.readthedocs.io/en/stable/validators.html#wtforms.validators.IPAddress</li>
+<p><strong>jinja2:</strong></p>
+	<li>https://pythonista.io/cursos/py201/introduccion-a-jinja-2</li>
+	<li>http://jinja.pocoo.org/docs/2.10/templates/</li>
+<p><strong>bootstrap:</strong></p>
+	<li>https://pythonhosted.org/Flask-Bootstrap/basic-usage.html</li>
+<p><strong>flask-login:</strong></p>
+
+	<li>https://plataforma.josedomingo.org/pledin/cursos/flask/curso/u30/</li>
+	<li>https://flask-login.readthedocs.io/en/latest/</li>
+	<li>https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-one#toc-auth-blueprint</li>
+	<li>https://ernestocrespo13.wordpress.com/2016/09/24/tutorial-de-flask-parte-5-login-de-los-usuarios/</li>
+	<li>https://yo.toledano.org/desarrollo/login-con-flask.html</li>
+	<li>https://infinidum.com/2018/08/18/making-a-simple-login-system-with-flask-login/</li>
+	<li>https://teamtreehouse.com/community/how-usermixin-and-class-inheritance-work</li>
+	<li>https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xxiii-application-programming-interfaces-apis</li>
+</ul>
+
+	 {% endif %}
+
+{% endblock %}
+
+

@@ -1,0 +1,36 @@
+{# <herencia y macro> #}
+{% extends 'base/base.html' %}
+
+        {% block content %}
+
+        {# {% from "_macro.html" import menu %}
+        {{ menu() }} #}
+
+
+		<div>
+			<h2 style="text-align:center">Registrar</h2>
+			{% from "_macro.html" import formulario %}
+
+		        <form action="{{ url_for('signUp') }}" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <div class="form-group col-xs-12 ">
+                		{{ formulario(form.cedula, class="form-control", placeholder="Introduzca cedula") }}
+                                </div>
+                                <div class="form-group col-xs-12 ">
+                		{{ formulario(form.nombre, class="form-control", placeholder="Introduzca nombre") }}
+                                </div>
+                                <div class="form-group col-xs-12 ">
+				{{ formulario(form.apellido, class="form-control", placeholder="Introduzca apellido") }}
+                                </div>
+                                <div class="form-group col-xs-12 ">
+                                {{ formulario(form.telefono, class="form-control", placeholder="Introduzca telefono") }}
+                                </div>
+                                <div class="form-group col-xs-12 ">
+				{{ formulario(form.direccion, class="form-control", placeholder="Introduzca direccion") }}
+                                </div>
+                                <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-primary">Enviar</button>                    
+                                </div>
+        		</form>
+
+{% endblock %}

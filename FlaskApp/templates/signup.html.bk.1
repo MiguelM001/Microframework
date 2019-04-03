@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Registrarse</title>
+	</head>
+	<body>
+		
+		{% from "_macro.html" import menu %}
+                {{ menu() }}
+
+		<div>
+			<h1>Formulario</h1>
+			{% from "_macro.html" import formulario %}
+
+		        <form action="{{ url_for('signUp') }}" method="post">
+                		{{ formulario(form.cedula) }}
+                		{{ formulario(form.nombre) }}
+				{{ formulario(form.apellido) }}
+                                {{ formulario(form.telefono) }}
+				{{ formulario(form.direccion) }}
+                                {{ formulario(form.submit) }}
+        		</form>
+
+			<footer class="footer">
+       				<p>&copy; Venezuela 2019</p>
+      			</footer>
+		</div>
+	</body>
+</html>

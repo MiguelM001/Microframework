@@ -1,0 +1,61 @@
+{% extends "bootstrap/base.html" %}
+        
+        
+        {% block title %}  Framework UBV {% endblock %}
+        
+      
+        {% block body %}
+
+           <div class="container">
+
+
+            {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+            <ul>
+                {% for msn in mensajes %}
+                 <li>{{ msn }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %} 
+
+            {% if current_user.is_authenticated %}
+                <h4> Bienvenido {{ current_user.nombre }}!</h4>
+            {% endif %}
+
+            <h1>_FlaskUbV</h1>
+            <h4>Framework para la Optimización del Desarrollo de Aplicaciones Web.</h4>
+       
+        {% block navbar %}
+
+            <h3>Menu</h3>
+            <div>      
+                <nav>
+                    <ul>
+                        <li><a href="index">Iniciar</a></li>
+                        {% if  not current_user.is_authenticated %}  
+                            <li>Opcion 2</li>
+                        {% else %}
+                            <li><a href="crud">Administrar</a></li>
+                        {% endif %}
+                        <li>Opcion 3</li>
+                        {% if  not current_user.is_authenticated %}  
+                            <li><a href="showSignUp">Registrar</a></li>
+                        {% else %}
+                            <li><a href="logout">Salir</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
+		{% endblock %} <!-- fin_navbar -->
+
+		    {% block content %} 
+		    {% endblock %}
+         
+
+            <footer class="page-footer font-small blue">
+                        <div class="footer-copyright text-center py-3">&copy; Miguel Marquez 2019<a href="http://ubv.edu.ve/"> UBV</a></div>
+            </footer>
+         </div>
+        {% endblock %} <!-- fin_body ->

@@ -1,0 +1,34 @@
+import db
+
+class User: #User(db.mysqll): ojo mejorar
+	conexion= db.mysql.connect()
+	cursor= conexion.cursor()
+	cursor.execute('SELECT cedulad FROM Datos')#columna de cedulas
+	id= cursor.fetchall()
+	cursor.execute('SELECT nombred FROM Datos')#columna de nombres
+	nombre= cursor.fetchall()
+	#cursor.close() ojo recordar cerrar la base de datos        
+        
+	def is_authenticated(self):
+		return True
+
+	def is_active(self):
+		return True
+
+	def is_anonymous(self):
+		return False
+
+	def get_id(self):
+		return str(self.id)
+
+
+	def __repr__(self):
+        	return '' % (self.nombre)
+  
+	#def imprimir(self):
+	#	print(self.id[0]+self.nombre[0])
+
+
+#miUsuario= User()
+#print(miUsuario.get_id())
+#miUsuario.imprimir()

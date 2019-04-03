@@ -1,0 +1,22 @@
+{# menu de la pagina #}
+{# {% macro menu() %}
+
+
+<h1>Menu</h1>
+	<div>
+		<nav>
+			<ul>
+				<li><a href="/">Inicio</a></li>
+				<li>opcion 2</li>
+				<li>opcion 3</li>
+			</ul>
+		</nav>
+	</div>
+
+{% endmacro %} #}
+
+{# formularios  #}
+{% macro formulario(field) %}
+	{{ field.label }}  
+	{{ field(**kwargs)|safe }} 
+{% endmacro  %}

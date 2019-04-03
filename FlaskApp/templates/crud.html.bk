@@ -1,0 +1,26 @@
+{# <herencia y macro> #}
+{% extends 'base/base.html' %}
+
+        {% block content %}
+
+        	{# {% from "_macro.html" import menu %}
+        	{{ menu() }} #}
+
+		<div style="text-align:center">	
+		{% for i in range(0, lista|length ) %}
+		<form action="{{ url_for('crud') }}" method="post" >
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+			<p>
+			{% for j in range(0, lista[i]|length ) %}
+				{{ lista[i][j] }}	
+				<input type="hidden" name="valorEditar" value="{{ lista[i][j] }}">
+
+ 			{% endfor %}		
+				<input type="hidden" name="tuplaEliminar" value="{{ lista[i][0] }}"> 
+        	                <input type="submit"  class="btn btn-danger" value="eliminar">
+			</p>	
+		</form>
+			
+		{% endfor %}
+		</div>
+	{% endblock %}

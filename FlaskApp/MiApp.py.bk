@@ -1,0 +1,47 @@
+from flask import Flask, render_template, request, json
+import db, form
+
+app= Flask(__name__)#instancia de la clase (nuevo objeto)
+
+#Pagina de error
+@app.errorhandler(404)
+def paginaNoEncontrada(e):
+	return render_template('404.html'), 404
+
+#Pagina principal
+@app.route("/")#decorador indica ruta del servidor al usuario
+def main():
+	return render_template('index.html')
+
+#Pagina registrar
+@app.route('/showSignUp')
+def showSignUp():
+	miFormulario= form.Formulario()
+	return render_template('signup.html', form= miFormulario)
+
+#Captura de datos
+@app.route('/signUp',methods=['POST'])
+def signUp():
+	cedula= request.form['inputCedula']
+	nombre= request.form['inputNombre']     
+	apellido= request.form['inputApellido']
+	telefono= request.form['inputTelefono']
+	direccion= request.form['inputDireccion']
+	print(cedula+' '+nombre+' '+apellido+' '+telefono+' '+direccion)
+	#putDB(cedula, nombre, apellido, telefono, direccion)    
+	return "<h1>Datos Enviados</h1>"
+	#return json.dumps({'html':'<span> Prueba Json </span>'})
+
+#Insertar en la Base de Datos	
+def putDB(cedula, nombre, apellido, telefono, direccion):
+	print(cedula+' '+nombre+' '+apellido+' '+telefono+' '+direccion)
+	conexion= db.mysql.connect()
+	cursor= conexion.cursor()
+	consulta='INSERT INTO Datos(cedulad, nombred, apellidod, direccion, telefono) VALUES ("'+cedula+'", "'+nombre+'", "'+apellido+'", "'+direccion+'", "'+telefono+'")'
+	#consulta='INSERT INTO Datos(cedulad, nombred, apellidod, direccion, telefono) VALUES (%s, %s, %s, %s, %s)'
+	#cursor.execute(consulta,(cedula, nombre, apellido, direccion, telefono))
+	cursor.execute(consulta)
+	conexion.commit()
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)#ejecuta el servidor en el púerto 5000

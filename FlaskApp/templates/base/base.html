@@ -1,0 +1,61 @@
+{% extends "bootstrap/base.html" %}
+        
+        
+        {% block title %}  Framework UBV {% endblock %}
+        
+      
+        {% block body %}
+
+           <div class="container">
+
+
+            {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+            
+                {% for msn in mensajes %}
+                 <h4 style="float: right; position: relative;"><span style="color:#ce3a3a">{{ msn }}</span></h4>
+                {% endfor %}
+          
+            {% endif %}
+            {% endwith %} 
+
+            {% if current_user.is_authenticated %}
+                <h4 style="float: right; position: relative; color:#727272" > bienvenido <span style="color:#ce3a3a">{{ current_user.nombre }}</span>!</h4>
+            {% endif %}
+
+            <h1  >_Flask<span class="bg-danger" style="color:#ce3a3a" >UBV</span></h1>
+       
+        {% block navbar %}
+
+           <div >      
+                <nav class="navbar">
+                    <div>
+                    <ul class="navbar-nav nav" style="float: right;">
+                        <li><a href="index">Iniciar</a></li>
+                        {% if  not current_user.is_authenticated %}  
+                            <li><a href="#" >Opcion 2</a></li>
+                        {% else %}
+                            <li><a href="crud">Administrar</a></li>
+                        {% endif %}
+                        <li><a href="#" >Opcion 3</a></li>
+                        {% if  not current_user.is_authenticated %}  
+                            <li><a href="showSignUp">Registrar</a></li>
+                        {% else %}
+                            <li><a href="logout">Salir</a></li>
+                        {% endif %}
+                    </ul>
+                    </div>
+                </nav>
+            </div>
+
+		{% endblock %} <!-- fin_navbar -->
+
+		    {% block content %} 
+		    {% endblock %}
+         
+
+            <footer class="page-footer font-small blue">
+                        <div class="footer-copyright text-center py-3">&copy; Miguel Marquez 2019. Aplicaciones Avanzandas de Internet <a href="http://ubv.edu.ve/"> UBV</a></div>
+            </footer>
+         </div>
+        {% endblock %} <!-- fin_body ->

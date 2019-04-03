@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+        <head>
+                <title>Framework UBV</title>
+        </head>
+        <body>
+
+            {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+            <ul>
+                {% for msn in mensajes %}
+                 <li>{{ msn }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %} 
+
+            {% if current_user.is_authenticated %}
+                <h4> Bienvenido {{ current_user.nombre }}!</h4>
+            {% endif %}
+
+            <h1>_FlaskUbV</h1>
+            <h4>Framework para la Optimización del Desarrollo de Aplicaciones Web.</h4>
+
+            <h3>Menu</h3>
+            <div>      
+                <nav>
+                    <ul>
+                        <li><a href="index">Iniciar</a></li>
+                        {% if  not current_user.is_authenticated %}  
+                            <li>Opcion 2</li>
+                        {% else %}
+                            <li><a href="crud">Administrar</a></li>
+                        {% endif %}
+                        <li>Opcion 3</li>
+                        {% if  not current_user.is_authenticated %}  
+                            <li><a href="showSignUp">Registrar</a></li>
+                        {% else %}
+                            <li><a href="logout">Salir</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
+		
+		    {% block content %}
+		    {% endblock %}
+         
+
+            <footer class="">
+                        <p>&copy; Venezuela 2019</p>
+            </footer>
+
+        </body>
+
+</html>

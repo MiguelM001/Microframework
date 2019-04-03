@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Mi Primer Framework</title>
+	</head>
+	<body>
+
+		<h1>Mi Primer Framework</h1>
+
+		{% from "_macro.html" import menu %}
+		{{ menu() }}
+			
+		<div>		
+
+	        <nav>
+                	<ul>
+                		<li><a href="showSignUp">Sign Up</a></li>
+                	</ul>
+                </nav>
+
+		<div>
+			
+			<h1>Login</h1>
+                      
+			<form>
+                                {{ form.cedula.label }}
+                                {{ form.cedula }}
+                                {{ form.nombre.label }}
+                                {{ form.nombre }}
+                        </form>
+
+		<div>
+
+		<footer class="">
+                	<p>&copy; Venezuela 2019</p>
+                </footer>
+
+
+		</div>
+	</body>
+
+</html>

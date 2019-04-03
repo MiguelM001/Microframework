@@ -1,0 +1,79 @@
+from flask import Flask, render_template, request, json
+import db, form
+
+app= Flask(__name__)#instancia de la clase (nuevo objeto)
+#--------------------------------- RENDERIZADO DE LAS PAGINAS WEB-----------------------$
+
+#Pagina de Error
+@app.errorhandler(404)
+def paginaNoEncontrada(e):
+	return render_template('404.html'), 404
+
+#Pagina Principal
+@app.route("/")#decorador indica ruta del servidor al usuario
+def main():
+	miFormulario= form.Login()
+	return render_template('index.html', form= miFormulario)
+
+#Pagina Registrar
+@app.route('/showSignUp')
+def showSignUp():# crea los formularios en la pagina web
+	miFormulario= form.Formulario()
+	return render_template('signup.html', form= miFormulario)
+
+#Pagina CRUD
+@app.route('/crud')
+def crud():
+	#li=('1','2','3','4','5')
+	return render_template('crud.html', lista=getDB())
+#-------------------------------------------------------------------------------------------
+#--------------------------------- OPERACIONES DE SESION------------------------------------
+
+
+
+
+
+
+#-------------------------------------------------------------------------------------------
+#Captura de Datos de Formulario
+@app.route('/signUp',methods=['POST'])
+def signUp():
+	misDatos= form.Formulario(request.form)
+	cedula= misDatos.cedula.data
+	nombre= misDatos.nombre.data
+	apellido= misDatos.apellido.data
+	telefono= misDatos.telefono.data
+	direccion= misDatos.direccion.data
+	#print(str(cedula)+' '+nombre+' '+apellido+' '+telefono+' '+direccion)
+	putDB(cedula, nombre, apellido, telefono, direccion)    
+	return "<h1>Datos Enviados</h1>"
+	#return json.dumps({'html':'<span> Prueba Json </span>'})
+
+		
+#--------------------------------- OPERACIONES CON LA BD------------------------------------
+#Insertar en la Base de Datos	
+def putDB(cedula, nombre, apellido, telefono, direccion):
+	print(str(cedula)+' '+nombre+' '+apellido+' '+telefono+' '+direccion)
+	conexion= db.mysql.connect()
+	cursor= conexion.cursor()
+	consulta='INSERT INTO Datos(cedulad, nombred, apellidod, direccion, telefono) VALUES ("'+str(cedula)+'", "'+nombre+'", "'+apellido+'", "'+direccion+'", "'+telefono+'")'
+	#consulta='INSERT INTO Datos(cedulad, nombred, apellidod, direccion, telefono) VALUES (%s, %s, %s, %s, %s)'
+	#cursor.execute(consulta,(cedula, nombre, apellido, direccion, telefono))
+	cursor.execute(consulta)
+	conexion.commit()
+
+#Imprimir la Base de Datos
+def getDB():
+	conexion= db.mysql.connect()
+	cursor= conexion.cursor()
+	cursor.execute('SELECT * FROM Datos')
+	return cursor.fetchall()
+	#datos= cursor.fetchall()
+	#print(datos[0][0])
+#-------------------------------------------------------------------------------------------
+
+
+	
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)#ejecuta el servidor en el púerto 5000

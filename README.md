@@ -30,6 +30,19 @@ flask: es un microframework de python, ideal para principiantes, que usa la tecn
     1.- pip3 install flask #dentro del entorno virutal y en minusculas
     2.- ejecutar flask: FLASK_APP=mi_archivo_flask.py flask run
         otra manera de ejecutar flask es llamando a la funcion "app.run()" dentro del archivo que contiene el codigo fuente, luego de: if __name__ == "__main__":
+        
+codigo de ejemplo:
+
+from flask import Flask
+
+app= Flask(__name__)
+
+@app.route("/")
+def main():
+	return "Hola mundo!"
+
+if __name__ == "__main__":
+    app.run()
 
 problemas y soluciones:
 
